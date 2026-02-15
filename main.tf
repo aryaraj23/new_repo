@@ -36,7 +36,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "pvt_subnet" {
   vpc_id = aws_vpc.my-vpc.id
   cidr_block = "10.0.2.0/24"
-  availabililty_zone = "${var.region}a"
+  availability_zone = "${var.region}a"
 
   tags = {
     Name = "pvt_subnet"
@@ -60,7 +60,7 @@ resource "aws_route_table" "public_rt" {
 # ---Route Table Associate ---- 
 resource "aws_route_table_association" "public_associate" {
   subnet_id = aws_subnet.public_subnet.id
-  route_table_d = aws_route_table.public_rt.id
+  route_table_id = aws_route_table.public_rt.id
 }
 
 # -----Security Group------
