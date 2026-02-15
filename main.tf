@@ -27,7 +27,7 @@ resource "aws_subnet" "public_subnet" {
   map_public_ip_on_launch = true
   availability_zone = "${var.region}a"
 
-  tags {
+  tags = {
    Name = "public-subnet"
   }
 }
@@ -58,7 +58,7 @@ resource "aws_route_table" "public_rt" {
 }
 
 # ---Route Table Associate ---- 
-resource "aws_route_table_associate" "public_associate" {
+resource "aws_route_table_association" "public_associate" {
   subnet_id = aws_subnet.public_subnet.id
   route_table_d = aws_route_table.public_rt.id
 }
@@ -74,7 +74,7 @@ resource "aws_security_group" "frontend_sg" {
     from_port = 22
     to_port = 22
     protocol = "tcp"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
    }
 
   ingress {
@@ -82,14 +82,14 @@ resource "aws_security_group" "frontend_sg" {
     from_port = 80
     to_port = 80
     protocol = "tcp"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
    }
 
   egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
    }
 }
 resource "aws_security_group" "private_sg" {
@@ -101,14 +101,14 @@ resource "aws_security_group" "private_sg" {
     from_port = 0
     to_port = 65535
     protocol = "tcp"
-    security_groups = "[aws_security_group.frontend_sg.id]"
+    security_groups = [aws_security_group.frontend_sg.id]
   }
 
   egress {
     from_port = 0
     to_port = 0
     protocol = "-1"
-    cidr_block = ["0.0.0.0/0"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 # ------Public EC2 Instance -----
