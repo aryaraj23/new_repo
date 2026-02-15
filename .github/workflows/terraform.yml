@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: terraform-env
+  cancel-in-progress: true
+
 jobs:
   terraform: 
       name: Terraform App
