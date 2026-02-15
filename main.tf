@@ -125,7 +125,7 @@ resource "aws_instance" "frontend" {
 }
 
 # -----Private EC2 Instance -----
-resource "aws_instance" "backend"
+resource "aws_instance" "backend" {
   ami = var.ami
   instance_type = "t2.micro"
   subnet_id = aws_subnet.pvt_subnet.id
