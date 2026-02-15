@@ -1,0 +1,13 @@
+name: Terraform AWS Application
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform: 
+      name: Terraform App
+      runs-on: ubuntu-latest
+
+     
