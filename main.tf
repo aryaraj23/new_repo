@@ -91,8 +91,8 @@ resource "aws_security_group" "frontend_sg" {
     protocol = "-1"
     cidr_block = ["0.0.0.0/0"]
    }
-
-resource "aws_security_group" "private_sg"
+}
+resource "aws_security_group" "private_sg" {
   name = "private-sg"
   vpc_id = aws_vpc.my-vpc.id
 
@@ -110,7 +110,7 @@ resource "aws_security_group" "private_sg"
     protocol = "-1"
     cidr_block = ["0.0.0.0/0"]
   }
-
+}
 # ------Public EC2 Instance -----
 resource "aws_instance" "frontend" {
   ami = var.ami
@@ -118,11 +118,11 @@ resource "aws_instance" "frontend" {
   subnet_id = aws_subnet.public_subnet.id
   vpc_security_group_ids = [aws_security_group.frontend_sg.id]
   associate_public_ip_address = true
- }
 
  tags = {
    Name = "frontend-ec2"
  }
+}
 
 # -----Private EC2 Instance -----
 resource "aws_instance" "backend"
