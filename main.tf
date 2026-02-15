@@ -12,7 +12,7 @@ tags = {
 }
 
 # ---Internet Gateway----
-resouce "aws_internet_gateway" "igw" {
+resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.my-vpc.id
 
   tags = {
