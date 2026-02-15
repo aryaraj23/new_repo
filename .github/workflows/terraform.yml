@@ -10,4 +10,23 @@ jobs:
       name: Terraform App
       runs-on: ubuntu-latest
 
+      steps:
+        - name: Check out Code
+          uses: actions/checkout@v3
+
+        - name: AWS configurations
+          uses: aws-actions/configure-aws-credentials@v3
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+        - name: Set Up Terraform
+          uses: hashicorp/setup-terraform@v3
+
+        - name: Terraform init
+          run: terraform init
+
+      
+          
+
      
